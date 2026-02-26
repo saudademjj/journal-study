@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Journal Study
 
-## Getting Started
+一个用于练手的全栈最小样例：`Next.js + Hono + Drizzle + PostgreSQL`。
 
-First, run the development server:
+## 项目现状
+
+当前仓库提供了一个基础雏形：
+
+- 首页：`/`（简单欢迎页）
+- API：`/api/hello`
+- 用户接口：
+  - `GET /api/users` 查询用户列表
+  - `POST /api/users` 新增用户
+
+## 技术栈
+
+- 前端：Next.js 16、React 19、TypeScript
+- API：Hono（挂载在 Next Route Handler）
+- 数据库：PostgreSQL
+- ORM：Drizzle ORM + Drizzle Kit
+
+## 环境要求
+
+- Node.js `>= 20`
+- npm `>= 10`
+- PostgreSQL `>= 14`
+
+## 快速开始
+
+### 1. 克隆并安装依赖
+
+```bash
+git clone https://github.com/saudademjj/journal-study.git
+cd journal-study
+npm install
+```
+
+### 2. 配置环境变量
+
+创建 `.env`：
+
+```env
+DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<db_name>
+```
+
+### 3. 初始化数据库
+
+```bash
+npx drizzle-kit generate
+npx drizzle-kit migrate
+```
+
+### 4. 启动开发服务
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+访问：`http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API 示例
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 获取用户
 
-## Learn More
+```bash
+curl http://localhost:3000/api/users
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 新增用户
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+curl -X POST http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice","email":"alice@example.com"}'
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 项目结构
 
-## Deploy on Vercel
+```text
+journal-study/
+├── app/                         # Next App Router 页面
+├── src/app/api/[[...route]]/    # Hono API 入口
+├── src/db/                      # Drizzle 连接与 schema
+├── drizzle.config.ts
+├── package.json
+└── README.md
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 后续可扩展方向
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 增加认证（JWT/Cookie Session）
+- 增加表单校验与统一错误处理
+- 增加迁移脚本与 seed 数据
+- 引入测试（API + E2E）
+
+## 许可证
+
+当前仓库未显式提供 License 文件。
