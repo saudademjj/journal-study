@@ -1,52 +1,42 @@
-# Journal-Study (全栈学习日志系统)
+# Journal-Study (全栈学习日志管理系统 / Journal-Study Full-stack Learning Journal System)
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?logo=react)](https://react.dev/)
-[![Hono](https://img.shields.io/badge/Hono-4.10-orange?logo=hono)](https://hono.dev/)
-[![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?logo=drizzle)](https://orm.drizzle.team/)
+采用 Next.js 16 架构开发的知识沉淀与学习历程记录系统，侧重于结构化笔记的存储与可视化展示。
 
-Journal-Study 是一款面向学习记录的全栈管理系统。项目采用 Next.js 16 与 Hono 架构，重点实现学习进度的分类化展示与持久化管理。
+A knowledge accumulation and learning journey recording system developed with Next.js 16 architecture, focusing on structured note storage and visualization.
 
-## 核心功能
+## 核心特性 / Core Features
 
-- 结构化记录: 支持对学习内容进行分类、添加标签，方便后期复盘。
-- 异步 API: 后端逻辑由 Hono 驱动，提供了快速的消息分发能力。
-- 全量类型安全: 利用 Drizzle ORM 和 TypeScript，实现从数据库到视图层的类型推导。
-- 交互设计: 采用 shadcn/ui 组件库，构建简洁的记录环境。
+- 结构化笔记治理: 支持精细化的分类与多维标签管理。 / Fine-grained classification and multi-dimensional tag management.
+- 异步 API 驱动: 后端逻辑由 Hono 驱动，确保轻量且快速的响应。 / Backend powered by Hono for lightweight and fast responses.
+- 现代渲染策略: 充分利用 Next.js 16 Server Components。 / Full utilization of Next.js 16 Server Components.
 
-## 技术栈
+## 技术栈 / Technical Stack
 
-- 框架: Next.js 16 (App Router), React 19
-- 后端: Hono, postgres.js
-- 持久层: Drizzle ORM
-- 工具: Tailwind CSS 4, Lucide React
+- 前端 / Frontend: Next.js 16, React 19, shadcn/ui.
+- 后端 / Backend: Hono (部署于 Edge 运行时 / Deployed on Edge), PostgreSQL.
+- 持久层 / Persistence: Drizzle ORM.
+- 样式 / Styling: Tailwind CSS 4.
 
-## 项目结构
+## 项目结构 / Project Structure
 
 ```text
-.
-├── src
-│   ├── app             # Next.js 路由与 API
-│   ├── components      # 可复用 UI 组件
-│   ├── db              # 数据库 Schema 定义
-│   └── lib             # 基础库与工具
-├── drizzle.config.ts   # 迁移配置
-└── package.json
+journal-study/
+├── src/
+│   ├── app/            # 页面容器与服务端端点 / Pages and server endpoints
+│   ├── components/     # 笔记编辑器与列表看板 / Note editor and list dashboard
+│   ├── db/             # Drizzle Schema 与数据访问层 / Drizzle schema and DAL
+│   └── lib/            # Markdown 处理与共享逻辑 / Markdown and shared logic
+└── drizzle.config.ts   # 数据库迁移治理配置 / DB migration management
 ```
 
-## 快速启动
+## 快速开始 / Quick Start
 
-### 1. 配置
-`npm install` 之后，在根目录配置数据库：
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/journal_study
+```bash
+npm install
+# 配置环境变量 DATABASE_URL
+npx drizzle-kit push
+npm run dev
 ```
 
-### 2. 初始化
-`npx drizzle-kit generate` 之后 `npx drizzle-kit migrate`。
-
-### 3. 运行
-`npm run dev`
-
-## 许可证
-MIT License
+## 许可证 / License
+本项目采用 [MIT License](LICENSE) 协议。 / This project is licensed under the MIT License.
