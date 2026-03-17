@@ -1,6 +1,7 @@
+[English](README_en.md) | 简体中文
+
 # Journal Study
 
-[English](README_en.md) | 简体中文
 
 `Journal Study` 是一个轻量级的全栈练手项目，用来验证 `Next.js + Hono + Drizzle + PostgreSQL` 这一组合在单仓库中的协作方式。它适合用作最小可运行样例、个人实验仓库或后续功能扩展的起点。
 
