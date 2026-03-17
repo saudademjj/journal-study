@@ -1,70 +1,121 @@
 <div align="center">
-  <a href="./README_en.md">English</a> | 简体中文
+  <p>A Full-Stack Minimal Boilerplate / 全栈最小可用样例练手项目</p>
+  <p>
+    <a href="#english">English</a> •
+    <a href="#简体中文">简体中文</a>
+  </p>
 </div>
 
-# Journal-Study (全栈学习日志管理系统)
+---
 
-![Next.js](https://img.shields.io/badge/Next.js-16.0-000000?style=flat-square&logo=next.js)
-![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react)
-![Hono](https://img.shields.io/badge/Hono-4.10-E36002?style=flat-square&logo=hono)
-![Drizzle](https://img.shields.io/badge/Drizzle_ORM-0.44-C5F74F?style=flat-square&logo=drizzle)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)
+<h2 id="english">🇬🇧 English</h2>
 
-本项目是一个专为知识建模与技术思考设计的全栈日志应用。系统采用 **Next.js 16 (App Router)** 配合 **Hono** 边缘 API 架构，旨在通过极简的交互界面与结构化的元数据管理，协助开发者构建具备高检索效率的个人知识库。
+# Journal Study
 
-## 🏛️ 技术架构深度剖析
+**Journal Study** is a minimal, yet robust full-stack boilerplate designed as a modern learning and prototyping playground. It integrates a cutting-edge web development stack featuring `Next.js`, `Hono`, `Drizzle ORM`, and `PostgreSQL`.
 
-### 1. RSC 与并发渲染实践 (Modern Frontend)
-- **React Server Components (RSC)**: 充分利用 Next.js 16 的 RSC 特性。Markdown 的解析与初步渲染在服务端完成，仅将轻量级的 HTML 传输至客户端，大幅减少了浏览器的 CPU 密集型任务。
-- **并发模式交互**: 结合 React 19 的并发特性，确保在切换大规模日志列表时，界面的交互依然保持即时响应。
+### 🚀 Project Overview
 
-### 2. 边缘优先的 API 治理 (Edge-First API)
-- **Hono @ Edge**: 后端逻辑托管在边缘运行时环境。通过 Hono 框架实现的极简控制器，确保了全球范围内的 API 响应时延处于毫秒级。
-- **类型安全推导**: 通过 Drizzle ORM 构建的 Schema，实现了从 SQL 查询到前端 View Model 的全量类型共享，杜绝了字段命名的运行时错误。
+Currently, the repository provides a foundational skeleton to build upon:
+- **Frontend Page**: `/` (A simple welcome interface)
+- **API Endpoints**: Built with Hono and mounted on Next.js Route Handlers.
+  - `GET /api/hello`
+  - `GET /api/users` (Fetch user list)
+  - `POST /api/users` (Create a new user)
 
-### 3. 结构化知识建模 (Knowledge Modeling)
-- **多维标签系统**: 每一条日志均支持关联自定义分类与扁平化标签。
-- **存储层优化**: 利用 PostgreSQL 的 JSONB 字段或关联表存储元数据，并配置 Gin 索引（预留）以支持未来的全文检索扩展。
+### 🛠 Technology Stack
 
-## 📂 项目结构规范
+- **Frontend**: Next.js 16 (App Router), React 19, TypeScript
+- **API Framework**: Hono
+- **Database**: PostgreSQL
+- **ORM**: Drizzle ORM + Drizzle Kit
 
-```text
-journal-study/
-├── src/
-│   ├── app/            # Next.js 16 核心路由、全局视图模板与 API 处理逻辑
-│   ├── components/
-│   │   ├── editor/     # 高性能 Markdown 编辑器组件，支持实时渲染
-│   │   ├── dashboard/  # 统计看板：包含日志密度热力图与分类概览
-│   │   └── ui/         # 基于原子化设计的组件库实现
-│   ├── db/             # Drizzle Schema 定义、连接池配置与数据迁移逻辑
-│   ├── lib/            # Markdown 渲染引擎、共享工具函数与校验逻辑
-│   └── hooks/          # 自定义数据拉取与 UI 状态管理 Hook
-├── public/             # 静态资产与文档说明
-├── drizzle.config.ts   # 数据库迁移治理配置文件
-└── package.json        # 项目依赖、构建指令与元数据
-```
+### ⚙️ Quick Start
 
-## 🚀 开发者快速入门
+1. **Clone & Install**:
+   ```bash
+   git clone https://github.com/saudademjj/journal-study.git
+   cd journal-study
+   npm install
+   ```
 
-### 1. 环境准备
-- Node.js >= 20
-- PostgreSQL >= 16
+2. **Environment Variables**:
+   Create a `.env` file at the root:
+   ```env
+   DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<db_name>
+   ```
 
-### 2. 部署流程
-```bash
-# 安装全量依赖
-npm install
+3. **Database Initialization**:
+   ```bash
+   npx drizzle-kit generate
+   npx drizzle-kit migrate
+   ```
 
-# 配置数据库连接串
-# 在 .env 中填入 DATABASE_URL=postgresql://...
+4. **Start Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Visit `http://localhost:3000` in your browser.
 
-# 模式推送与同步
-npx drizzle-kit push
+### 💡 Future Expansion Directions
 
-# 启动开发服务器
-npm run dev
-```
+- Integrate authentication (JWT/Cookie Sessions).
+- Add robust form validation (e.g., Zod) and global error handling.
+- Implement database seed scripts and advanced testing (API + E2E).
 
-## 许可证
-本项目采用 MIT License 协议。
+---
+
+<h2 id="简体中文">🇨🇳 简体中文</h2>
+
+# Journal Study
+
+**Journal Study** 是一个极简且结构清晰的全栈练手样例项目。它聚合了当今前沿的 Web 开发技术栈，包括 `Next.js`、`Hono`、`Drizzle ORM` 和 `PostgreSQL`，非常适合用于新技术调研与快速原型开发。
+
+### 🚀 项目现状
+
+当前仓库提供了一个基础的开发骨架，包含以下部分：
+- **前端页面**：`/`（简单的欢迎落地页）
+- **API 接口**：使用 Hono 构建，并挂载于 Next.js 的 Route Handler。
+  - `GET /api/hello`
+  - `GET /api/users`（查询用户列表）
+  - `POST /api/users`（新增用户接口）
+
+### 🛠 技术栈地图
+
+- **前端框架**：Next.js 16 (App Router), React 19, TypeScript
+- **API 框架**：Hono
+- **数据库引擎**：PostgreSQL
+- **持久层框架**：Drizzle ORM 配合 Drizzle Kit
+
+### ⚙️ 快速开始
+
+1. **克隆与依赖安装**：
+   ```bash
+   git clone https://github.com/saudademjj/journal-study.git
+   cd journal-study
+   npm install
+   ```
+
+2. **配置环境变量**：
+   在项目根目录创建 `.env` 文件：
+   ```env
+   DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<db_name>
+   ```
+
+3. **数据库模式初始化**：
+   ```bash
+   npx drizzle-kit generate
+   npx drizzle-kit migrate
+   ```
+
+4. **启动开发服务器**：
+   ```bash
+   npm run dev
+   ```
+   浏览器访问：`http://localhost:3000`。
+
+### 💡 后续演进方向思考
+
+- 增加身份认证系统（JWT 或 Cookie 方案）。
+- 引入表单校验（如 Zod）及统一的错误捕获层。
+- 编写 Seed 数据植入脚本，以及开展完整的 API 与端到端（E2E）测试。
