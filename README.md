@@ -1,8 +1,6 @@
-<a id="readme-top"></a>
-
 # Journal Study
 
-<p align="right">中文 | <a href="#english-version">English</a></p>
+<p align="right">中文 | <a href="https://github.com/saudademjj/journal-study/tree/codex/readme-en">English</a></p>
 
 `Journal Study` 是一个轻量级的全栈练手项目，用来验证 `Next.js + Hono + Drizzle + PostgreSQL` 这一组合在单仓库中的协作方式。它适合用作最小可运行样例、个人实验仓库或后续功能扩展的起点。
 
@@ -91,61 +89,3 @@ journal-study/
 ## 许可证
 
 本仓库采用 MIT License，详见 [LICENSE](./LICENSE)。
-
----
-
-## English Version
-
-<p align="right"><a href="#readme-top">中文</a> | English</p>
-
-`Journal Study` is a lightweight full-stack playground for validating a `Next.js + Hono + Drizzle + PostgreSQL` setup inside a single repository. It works well as a minimal starter, a learning project, or a base for future feature experiments.
-
-## What Is Included
-
-- A simple homepage
-- A `Hono` API entry mounted inside the app
-- `GET /api/hello`
-- User APIs:
-  - `GET /api/users`
-  - `POST /api/users`
-
-## Tech Stack
-
-- Frontend: `Next.js 16`, `React 19`, `TypeScript`
-- API: `Hono`
-- Database: `PostgreSQL`
-- ORM: `Drizzle ORM` and `Drizzle Kit`
-
-## Requirements
-
-- Node.js `>= 20`
-- npm `>= 10`
-- PostgreSQL `>= 14`
-
-## Quick Start
-
-```bash
-git clone https://github.com/saudademjj/journal-study.git
-cd journal-study
-npm install
-```
-
-Create `.env`:
-
-```env
-DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<db_name>
-```
-
-Initialize the database and start development:
-
-```bash
-npx drizzle-kit generate
-npx drizzle-kit migrate
-npm run dev
-```
-
-Default URL: `http://localhost:3000`
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](./LICENSE).
