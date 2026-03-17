@@ -1,10 +1,8 @@
+<a id="readme-top"></a>
+
 # Journal Study
 
-**Language:** [Chinese](#chinese-version) | [English](#english-version)
-
-## Chinese Version
-
-**Language:** Chinese | [English](#english-version)
+<p align="right">中文 | <a href="#english-version">English</a></p>
 
 `Journal Study` 是一个轻量级的全栈练手项目，用来验证 `Next.js + Hono + Drizzle + PostgreSQL` 这一组合在单仓库中的协作方式。它适合用作最小可运行样例、个人实验仓库或后续功能扩展的起点。
 
@@ -98,7 +96,7 @@ journal-study/
 
 ## English Version
 
-**Language:** [Chinese](#chinese-version) | English
+<p align="right"><a href="#readme-top">中文</a> | English</p>
 
 `Journal Study` is a lightweight full-stack playground for validating a `Next.js + Hono + Drizzle + PostgreSQL` setup inside a single repository. It works well as a minimal starter, a learning project, or a base for future feature experiments.
 
