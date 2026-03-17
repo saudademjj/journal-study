@@ -1,6 +1,6 @@
 # Journal Study
 
-[中文说明](./README.md)
+English | [简体中文](README.md)
 
 `Journal Study` is a lightweight full-stack playground for validating a `Next.js + Hono + Drizzle + PostgreSQL` setup inside a single repository. It works well as a minimal starter, a learning project, or a base for future feature experiments.
 
