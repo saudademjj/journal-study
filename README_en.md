@@ -2,69 +2,159 @@
   English | <a href="./README.md">简体中文</a>
 </div>
 
-# Journal-Study (Full-stack Learning Journal System)
+# Journal-Study -- Full-Stack Learning Journal & Notes System
 
-![Next.js](https://img.shields.io/badge/Next.js-16.0-000000?style=flat-square&logo=next.js)
-![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwind-css)
 ![Hono](https://img.shields.io/badge/Hono-4.10-E36002?style=flat-square&logo=hono)
-![Drizzle](https://img.shields.io/badge/Drizzle_ORM-0.44-C5F74F?style=flat-square&logo=drizzle)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?style=flat-square&logo=tailwind-css)
+![Drizzle](https://img.shields.io/badge/Drizzle_ORM-0.44-C5F74F?style=flat-square)
 
-A full-stack journal application designed for knowledge modeling and technical reflection. Utilizing the **Next.js 16 (App Router)** and **Hono** edge API architecture, the system provides a minimalist interface and structured metadata management to help developers build a highly searchable personal knowledge base.
+A full-stack learning journal system built with Next.js 16 and Hono for tracking study progress, organizing notes, and managing learning materials. The project leverages the latest React 19 concurrent features and App Router architecture, paired with Drizzle ORM for type-safe database operations. It serves as both a practical tool and a modern full-stack technology showcase.
 
-## 🏛️ Technical Architecture Deep Dive
+## Core Features
 
-### 1. RSC & Concurrent Rendering (Modern Frontend)
-- **React Server Components (RSC)**: Fully leverages Next.js 16 RSC features. Markdown parsing and initial rendering are performed on the server, sending only lightweight HTML to the client and significantly reducing browser CPU tasks.
-- **Concurrent Mode Interaction**: Combined with React 19 concurrent features, the interface remains responsive even when navigating through large-scale journal lists.
+### Learning Journal Management
+- Create, edit, and delete journal entries
+- Organize notes by date and topic
+- Rich text content recording
+- Timeline browsing and review
 
-### 2. Edge-First API Governance
-- **Hono @ Edge**: Backend logic is hosted in edge runtime environments. Minimalist controllers implemented via the Hono framework ensure millisecond-level API response latency globally.
-- **Type-Safe Inference**: Schemas built with Drizzle ORM enable end-to-end type sharing from SQL queries to frontend View Models, eliminating runtime field naming errors.
+### Note Organization
+- Structured note categorization system
+- Tag system for quick retrieval
+- Learning material linking and referencing
 
-### 3. Structured Knowledge Modeling
-- **Multi-dimensional Tag System**: Every journal entry supports association with custom categories and flat tags.
-- **Persistence Optimization**: Metadata is stored using PostgreSQL relational tables or JSONB fields, with GIN indexing (provisioned) to support future full-text search expansions.
+### Data Persistence
+- PostgreSQL relational storage for data safety
+- Drizzle ORM with full migration management
+- Seed data for quick demo environment initialization
 
-## 📂 Engineering Standards
+## Technical Architecture
+
+### Frontend
+
+- Next.js 16 (App Router): Latest server-side rendering and routing framework
+- React 19.2: Concurrent rendering, Server Components, latest Hooks API
+- TypeScript 5: End-to-end static type checking
+- Tailwind CSS 4: Next-generation atomic CSS engine
+- shadcn/ui: Component library built on Radix UI (class-variance-authority + tailwind-merge)
+- Lucide React: Lightweight, consistent icon library
+
+### Backend API
+
+- Hono 4.10: Ultra-lightweight web framework mounted on Next.js Route Handlers
+- Drizzle ORM 0.44: Type-safe SQL query builder and migration tool
+- PostgreSQL: Direct connection via `postgres` driver
+
+### Development Toolchain
+
+- ESLint: Code quality checking
+- Drizzle Kit: Database migration generation and management
+- tsx: Direct TypeScript script execution
+- dotenv: Environment variable management
+
+## Directory Structure
 
 ```text
 journal-study/
 ├── src/
-│   ├── app/            # Next.js 16 core routes, global layouts, and API handlers
-│   ├── components/
-│   │   ├── editor/     # High-performance Markdown editor with real-time preview
-│   │   ├── dashboard/  # Analytics: activity heatmaps and category overviews
-│   │   └── ui/         # Atomic design-based component library
-│   ├── db/             # Drizzle schema definitions, pool config, and migrations
-│   ├── lib/            # Markdown engines, shared utilities, and validation
-│   └── hooks/          # Custom hooks for data fetching and UI state
-├── public/             # Static assets and documentation
-├── drizzle.config.ts   # Database migration management config
-└── package.json        # Dependencies, scripts, and metadata
+│   ├── app/                # Next.js App Router entry
+│   │   ├── layout.tsx      # Root layout
+│   │   ├── page.tsx        # Home page
+│   │   └── globals.css     # Global styles
+│   ├── db/                 # Database connection and schema definitions
+│   └── favicon.ico         # Site icon
+├── app/                    # Extended app directory
+├── components/             # Reusable UI components
+│   └── ui/                 # shadcn/ui base components
+├── lib/                    # Utility functions and helper modules
+├── public/                 # Static assets
+├── drizzle.config.ts       # Drizzle ORM configuration
+├── next.config.ts          # Next.js configuration
+├── tsconfig.json           # TypeScript configuration
+└── package.json            # Dependencies and scripts
 ```
 
-## 🚀 Quick Start for Developers
+## Quick Start
 
-### 1. Requirements
+### Prerequisites
+
 - Node.js >= 20
 - PostgreSQL >= 16
 
-### 2. Deployment
+### 1. Clone and Install
+
 ```bash
-# Install all dependencies
+git clone https://github.com/saudademjj/journal-study.git
+cd journal-study
 npm install
+```
 
-# Configure Database Connection
-# Set DATABASE_URL=postgresql://... in .env
+### 2. Environment Configuration
 
-# Schema Push & Sync
-npx drizzle-kit push
+Create a `.env.local` file and configure the database connection:
 
-# Launch Development Server
+```bash
+DATABASE_URL=postgresql://user:password@localhost:5432/journal
+```
+
+### 3. Database Initialization
+
+```bash
+# Generate migration files (if schema has changed)
+npx drizzle-kit generate
+
+# Execute migrations
+npx drizzle-kit migrate
+```
+
+### 4. Start Development Server
+
+```bash
 npm run dev
 ```
 
+Visit `http://localhost:3000` to use the application.
+
+### Available Commands
+
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Linting
+```
+
+## Database Management
+
+The project uses Drizzle Kit to manage database schema and migrations:
+
+```bash
+# Generate SQL migrations from schema changes
+npx drizzle-kit generate
+
+# Apply migrations to database
+npx drizzle-kit migrate
+
+# Launch visual database management interface
+npx drizzle-kit studio
+```
+
+Schema definitions are located in the `src/db/` directory, written using Drizzle ORM's TypeScript DSL to ensure type consistency between database structure and application code.
+
+## Project Highlights
+
+As a full-stack technology practice project, it covers the following engineering aspects:
+
+- Isomorphic Architecture: Next.js App Router unifies frontend and backend code organization
+- End-to-End Types: TypeScript types flow from database schema through API responses to frontend rendering
+- Modern CSS: Tailwind CSS 4's new compilation engine delivers faster build times
+- Lightweight API: Hono framework replaces traditional Express with smaller bundle size and better performance
+- New ORM Paradigm: Drizzle offers a more SQL-native query experience compared to Prisma while maintaining type safety
+
 ## License
+
 MIT License
