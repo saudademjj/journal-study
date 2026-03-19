@@ -2,7 +2,9 @@
   English | <a href="./README.md">简体中文</a>
 </div>
 
-# Journal-Study -- Full-Stack Learning Journal & Notes System
+# Journal Study
+
+A learning project built with a modern full-stack tech stack, designed to explore and practice the development patterns of Next.js 16 + Hono + Drizzle ORM + PostgreSQL.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react)
@@ -12,71 +14,84 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql)
 ![Drizzle](https://img.shields.io/badge/Drizzle_ORM-0.44-C5F74F?style=flat-square)
 
-A full-stack learning journal system built with Next.js 16 and Hono for tracking study progress, organizing notes, and managing learning materials. The project leverages the latest React 19 concurrent features and App Router architecture, paired with Drizzle ORM for type-safe database operations. It serves as both a practical tool and a modern full-stack technology showcase.
+---
 
-## Core Features
+## About
 
-### Learning Journal Management
-- Create, edit, and delete journal entries
-- Organize notes by date and topic
-- Rich text content recording
-- Timeline browsing and review
+This is a technology learning and practice project, not a complete application product. The core purpose is to gain hands-on understanding of how the following technologies work together by building a full-stack application skeleton:
 
-### Note Organization
-- Structured note categorization system
-- Tag system for quick retrieval
-- Learning material linking and referencing
+- Organizing frontend pages and routing with Next.js App Router
+- Building lightweight API services with Hono
+- Implementing type-safe database operations with Drizzle ORM
+- Building reusable component systems with shadcn/ui
+- Styling with Tailwind CSS 4
 
-### Data Persistence
-- PostgreSQL relational storage for data safety
-- Drizzle ORM with full migration management
-- Seed data for quick demo environment initialization
+The project is currently in its initial stage, containing the basic project structure, database connection, API endpoint examples, and UI component examples.
 
-## Technical Architecture
+---
 
-### Frontend
-
-- Next.js 16 (App Router): Latest server-side rendering and routing framework
-- React 19.2: Concurrent rendering, Server Components, latest Hooks API
-- TypeScript 5: End-to-end static type checking
-- Tailwind CSS 4: Next-generation atomic CSS engine
-- shadcn/ui: Component library built on Radix UI (class-variance-authority + tailwind-merge)
-- Lucide React: Lightweight, consistent icon library
-
-### Backend API
-
-- Hono 4.10: Ultra-lightweight web framework mounted on Next.js Route Handlers
-- Drizzle ORM 0.44: Type-safe SQL query builder and migration tool
-- PostgreSQL: Direct connection via `postgres` driver
-
-### Development Toolchain
-
-- ESLint: Code quality checking
-- Drizzle Kit: Database migration generation and management
-- tsx: Direct TypeScript script execution
-- dotenv: Environment variable management
-
-## Directory Structure
+## Project Structure
 
 ```text
 journal-study/
+├── app/                            # Root layout and home page
+│   ├── layout.tsx                  # Root layout (Geist fonts)
+│   ├── page.tsx                    # Home page
+│   └── globals.css                 # Global styles (OKLch theme)
 ├── src/
-│   ├── app/                # Next.js App Router entry
-│   │   ├── layout.tsx      # Root layout
-│   │   ├── page.tsx        # Home page
-│   │   └── globals.css     # Global styles
-│   ├── db/                 # Database connection and schema definitions
-│   └── favicon.ico         # Site icon
-├── app/                    # Extended app directory
-├── components/             # Reusable UI components
-│   └── ui/                 # shadcn/ui base components
-├── lib/                    # Utility functions and helper modules
-├── public/                 # Static assets
-├── drizzle.config.ts       # Drizzle ORM configuration
-├── next.config.ts          # Next.js configuration
-├── tsconfig.json           # TypeScript configuration
-└── package.json            # Dependencies and scripts
+│   ├── app/
+│   │   └── api/[[...route]]/
+│   │       └── route.ts            # Hono API routes
+│   └── db/
+│       ├── index.ts                # Drizzle ORM database connection
+│       └── schema.ts               # Table definitions
+├── components/
+│   └── ui/
+│       └── button.tsx              # Button component (shadcn/ui)
+├── lib/
+│   └── utils.ts                    # Utility functions
+├── drizzle.config.ts               # Drizzle ORM configuration
+├── next.config.ts                  # Next.js configuration
+├── components.json                 # shadcn/ui configuration
+├── tsconfig.json                   # TypeScript configuration
+├── postcss.config.mjs              # PostCSS configuration
+└── package.json                    # Dependencies and scripts
 ```
+
+---
+
+## Tech Stack
+
+### Frontend
+
+| Technology | Version | Description |
+|------------|---------|-------------|
+| Next.js | 16.0.5 | React full-stack framework with App Router |
+| React | 19.2.0 | UI library with concurrent features |
+| TypeScript | 5 | Type safety |
+| Tailwind CSS | 4 | Atomic CSS framework |
+| shadcn/ui | - | Component library built on Radix UI (New York style) |
+| Lucide React | 0.555.0 | Icon library |
+
+### Backend
+
+| Technology | Version | Description |
+|------------|---------|-------------|
+| Hono | 4.10.7 | Lightweight web framework |
+| Drizzle ORM | 0.44.7 | Type-safe ORM |
+| PostgreSQL | 16+ | Relational database |
+| postgres | 3.4.7 | PostgreSQL driver |
+
+### Development Tools
+
+| Tool | Description |
+|------|-------------|
+| ESLint 9 | Code linting |
+| Drizzle Kit | Database migration management |
+| tsx | TypeScript execution tool |
+| dotenv | Environment variable management |
+
+---
 
 ## Quick Start
 
@@ -85,76 +100,116 @@ journal-study/
 - Node.js >= 20
 - PostgreSQL >= 16
 
-### 1. Clone and Install
+### Setup
+
+1. Clone the repository
 
 ```bash
 git clone https://github.com/saudademjj/journal-study.git
 cd journal-study
+```
+
+2. Install dependencies
+
+```bash
 npm install
 ```
 
-### 2. Environment Configuration
+3. Configure environment variables
 
-Create a `.env.local` file and configure the database connection:
+Create a `.env.local` file in the project root:
 
-```bash
-DATABASE_URL=postgresql://user:password@localhost:5432/journal
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 ```
 
-### 3. Database Initialization
+4. Run database migrations
 
 ```bash
-# Generate migration files (if schema has changed)
 npx drizzle-kit generate
-
-# Execute migrations
 npx drizzle-kit migrate
 ```
 
-### 4. Start Development Server
+5. Start the development server
 
 ```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000` to use the application.
+Visit [http://localhost:3000](http://localhost:3000) to view the project.
 
-### Available Commands
+---
+
+## API Endpoints
+
+The project uses the Hono framework, mounted via Next.js catch-all route handlers:
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/hello` | Test endpoint, returns a greeting message |
+| GET | `/api/users` | Fetch all users |
+| POST | `/api/users` | Create a user (params: name, email) |
+
+---
+
+## Database
+
+### Data Model
+
+Currently defines a `users` table:
+
+| Field | Type | Constraints |
+|-------|------|-------------|
+| id | serial | Primary key |
+| name | text | Required |
+| email | text | Required, unique |
+| createdAt | timestamp | Defaults to now |
+
+### Database Management
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Production build
-npm run start    # Start production server
-npm run lint     # Linting
-```
-
-## Database Management
-
-The project uses Drizzle Kit to manage database schema and migrations:
-
-```bash
-# Generate SQL migrations from schema changes
-npx drizzle-kit generate
-
-# Apply migrations to database
-npx drizzle-kit migrate
-
-# Launch visual database management interface
-npx drizzle-kit studio
+npx drizzle-kit generate   # Generate migrations from schema changes
+npx drizzle-kit migrate    # Apply migrations to database
+npx drizzle-kit studio     # Launch visual management interface
 ```
 
 Schema definitions are located in the `src/db/` directory, written using Drizzle ORM's TypeScript DSL to ensure type consistency between database structure and application code.
+
+---
+
+## Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Production build
+npm run start     # Start production server
+npm run lint      # Run linting
+```
+
+---
 
 ## Project Highlights
 
 As a full-stack technology practice project, it covers the following engineering aspects:
 
-- Isomorphic Architecture: Next.js App Router unifies frontend and backend code organization
-- End-to-End Types: TypeScript types flow from database schema through API responses to frontend rendering
-- Modern CSS: Tailwind CSS 4's new compilation engine delivers faster build times
-- Lightweight API: Hono framework replaces traditional Express with smaller bundle size and better performance
-- New ORM Paradigm: Drizzle offers a more SQL-native query experience compared to Prisma while maintaining type safety
+- Isomorphic Architecture -- Next.js App Router unifies frontend and backend code organization
+- End-to-End Types -- TypeScript types flow from database schema through API responses to frontend rendering
+- Modern CSS -- Tailwind CSS 4's new compilation engine delivers faster build times
+- Lightweight API -- Hono framework replaces traditional Express with smaller bundle size and better performance
+- New ORM Paradigm -- Drizzle offers a more SQL-native query experience compared to Prisma while maintaining type safety
+
+---
+
+## References
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Hono Documentation](https://hono.dev)
+- [Drizzle ORM Documentation](https://orm.drizzle.team)
+- [shadcn/ui Documentation](https://ui.shadcn.com)
+- [Tailwind CSS Documentation](https://tailwindcss.com)
+
+---
 
 ## License
 
-MIT License
+[MIT](LICENSE)
